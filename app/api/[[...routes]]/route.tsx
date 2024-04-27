@@ -33,7 +33,8 @@ const app = new Frog<{ State: State }>({
 
 app.frame('/', (c) => {
   return c.res({
-    image: (`${process.env.VERCEL_URL || 'http://localhost:3000'}/frameImage.jpg`),
+    // image: (`${process.env.VERCEL_URL || 'http://localhost:3000'}/frameImage.jpg`),
+    image: 'https://ethevacuations-frame.vercel.app/frameImage.jpg',
     imageAspectRatio: '1.91:1',
     intents: [
       <TextInput placeholder="Amount in ETH e.g. 0.1" />,
@@ -63,7 +64,8 @@ app.frame('/tx-success', async (c) => {
   let { transactionId, deriveState } = c;
 
   return c.res({
-    image: (`${process.env.VERCEL_URL || 'http://localhost:3000'}/frameImage.jpg`),
+    //image: (`${process.env.VERCEL_URL || 'http://localhost:3000'}/frameImage.jpg`),
+    image: 'https://ethevacuations-frame.vercel.app/frameImage.jpg',
     imageAspectRatio: '1.91:1',
     intents: [
       <Button>Thank you!</Button>,
