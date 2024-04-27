@@ -35,11 +35,8 @@ app.frame('/', (c) => {
   const { buttonValue, inputText, status } = c
   const fruit = inputText || buttonValue
   return c.res({
-    image: (
-      <div>
-        Donate to ethevacuations.eth to evacuate civilizans in the Gaza conflict
-      </div>
-    ),
+    image: (`${process.env.VERCEL_URL || 'http://localhost:3000'}/frameImage.jpg`),
+    imageAspectRatio: '1:1',
     intents: [
       <TextInput placeholder="Amount in ETH e.g. 0.1" />,
       <Button.Transaction target="/tx" action="/tx-success">Donate Now</Button.Transaction>,
@@ -68,12 +65,10 @@ app.frame('/tx-success', async (c) => {
   let { transactionId, deriveState } = c;
 
   return c.res({
-    image: (
-      <div>
-        Thank you for your donation! Your transaction is being processed.
-      </div>
-    ),
+    image: (`${process.env.VERCEL_URL || 'http://localhost:3000'}/frameImage.jpg`),
+    imageAspectRatio: '1:1',
     intents: [
+      <Button>Thank you!</Button>,
       <Button.Link href={`https://basescan.org/tx/${transactionId}`}>View on BaseScan</Button.Link>,
     ],
   })
