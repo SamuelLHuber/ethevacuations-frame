@@ -32,11 +32,9 @@ const app = new Frog<{ State: State }>({
 })
 
 app.frame('/', (c) => {
-  const { buttonValue, inputText, status } = c
-  const fruit = inputText || buttonValue
   return c.res({
     image: (`${process.env.VERCEL_URL || 'http://localhost:3000'}/frameImage.jpg`),
-    imageAspectRatio: '1:1',
+    imageAspectRatio: '1.91:1',
     intents: [
       <TextInput placeholder="Amount in ETH e.g. 0.1" />,
       <Button.Transaction target="/tx" action="/tx-success">Donate Now</Button.Transaction>,
@@ -66,7 +64,7 @@ app.frame('/tx-success', async (c) => {
 
   return c.res({
     image: (`${process.env.VERCEL_URL || 'http://localhost:3000'}/frameImage.jpg`),
-    imageAspectRatio: '1:1',
+    imageAspectRatio: '1.91:1',
     intents: [
       <Button>Thank you!</Button>,
       <Button.Link href={`https://basescan.org/tx/${transactionId}`}>View on BaseScan</Button.Link>,
