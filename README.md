@@ -4,8 +4,6 @@ Move .env.sample to .env or set it in your deployment.
 
 [Neynar API Key available here](https://neynar.com)
 
-FrameURL is the domain you deploy to. For example: "https://hupfmedia.de"
-
 BaseURL is your Base Chain RPC or leave empty to use a public slower one (may time out)
 
 then run
