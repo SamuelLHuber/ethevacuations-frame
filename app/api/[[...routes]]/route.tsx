@@ -5,7 +5,7 @@ import { devtools } from 'frog/dev'
 import { neynar } from 'frog/hubs';
 import { handle } from 'frog/next'
 import { serveStatic } from 'frog/serve-static'
-import { createPublicClient, http } from 'viem';
+import { createPublicClient, http, parseEther } from 'viem';
 import { base } from 'viem/chains';
 
 const baseClient = createPublicClient({
@@ -48,7 +48,7 @@ app.frame('/', (c) => {
 })
 
 app.transaction('/tx', async (c) => {
-  const amount = BigInt(c.inputText || '0.05');
+  const amount = BigInt(parseEther(c.inputText || '0.05'));
 
   return c.res({
     chainId: `eip155:${base.id}`,
