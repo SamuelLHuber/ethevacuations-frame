@@ -9,8 +9,8 @@ import { createPublicClient, http, parseEther } from 'viem';
 import { base } from 'viem/chains';
 
 const baseClient = createPublicClient({
-    chain: base,
-    transport: http(process.env.BASE_RPC_URL || undefined)
+  chain: base,
+  transport: http(process.env.BASE_RPC_URL || undefined)
 })
 
 const ethevacuations = '0x8D5bF23b181EA94d3104d4192acb52427E54875A';
@@ -48,16 +48,20 @@ app.frame('/', (c) => {
 })
 
 app.transaction('/tx', async (c) => {
-  const amount = BigInt(parseEther(c.inputText || '0.05'));
+  try {
+    const amount = BigInt(parseEther(c.inputText || '0.05'));
+    return c.res({
+      chainId: `eip155:${base.id}`,
+      method: "eth_sendTransaction",
+      params: {
+        to: ethevacuations,
+        value: amount,
+      },
+    },);
 
-  return c.res({
-    chainId: `eip155:${base.id}`,
-    method: "eth_sendTransaction",
-    params: {
-      to: ethevacuations,
-      value: amount,
-    },
-  },)
+  } catch (e) {
+    return c.error({ message: 'Invalid amount try "0.1" for 0.1 ETH' });
+  }
 });
 
 app.frame('/tx-success', async (c) => {
@@ -66,7 +70,7 @@ app.frame('/tx-success', async (c) => {
   return c.res({
     image: (
       <div>
-         Thank you for your donation! Your transaction is being processed.
+        Thank you for your donation! Your transaction is being processed.
       </div>
     ),
     intents: [
@@ -75,7 +79,7 @@ app.frame('/tx-success', async (c) => {
   })
 });
 
-  
+
 
 devtools(app, { serveStatic })
 
